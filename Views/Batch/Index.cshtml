@@ -1,0 +1,23 @@
+﻿@model IEnumerable<EntityFrameWork_MVCDemo.Models.Batch>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1> List of Batches </h1>
+    
+<table>
+    <tr>
+        <th> Batch Code </th>
+        <th> Course </th>
+    </tr>
+
+    @{ foreach (Batch temp in Model)
+        {
+<tr>
+    <td> @temp.BatchCode </td>
+    <td> @temp.Course</td>
+</tr>
+        }
+    }
+
+</table>
