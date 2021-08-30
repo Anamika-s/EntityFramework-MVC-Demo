@@ -20,6 +20,18 @@ namespace EntityFrameWork_MVCDemo.Controllers
         {
             List<Batch> list = new List<Batch>();
             list = db.Batches.ToList();
+
+            var list1 = (from temp in db.Batches
+
+                         select temp);
+            foreach(var x in list1)
+                Console.WriteLine(x.BatchCode);
+
+            var list2 = (from temp in db.Batches
+
+                     select temp).ToList();
+            foreach (var x in list2)
+                Console.WriteLine(x.BatchCode);
             //return View(db.Batches.ToList());
             return View(list);
         }
@@ -31,8 +43,11 @@ namespace EntityFrameWork_MVCDemo.Controllers
         [HttpPost]
         public ActionResult Insert(Batch batch)
         {
-            db.Batches.Add(batch);
-            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                db.Batches.Add(batch);
+                db.SaveChanges();
+            }
             return View();
         }
 

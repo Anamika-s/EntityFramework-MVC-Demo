@@ -3,18 +3,19 @@ using EntityFrameWork_MVCDemo.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityFrameWork_MVCDemo.Migrations
 {
     [DbContext(typeof(BatchDbContext))]
-    partial class BatchDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210830054746_Added Course")]
+    partial class AddedCourse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("Admin")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -54,32 +55,12 @@ namespace EntityFrameWork_MVCDemo.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(20)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("CourseName");
 
                     b.HasKey("Id");
 
-                    b.ToTable("tblCourse");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Duration = 10,
-                            Name = "C#"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Duration = 40,
-                            Name = "DOtNet"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Duration = 20,
-                            Name = "Java"
-                        });
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("EntityFrameWork_MVCDemo.Models.Student", b =>

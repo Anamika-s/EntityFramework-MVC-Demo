@@ -3,18 +3,19 @@ using EntityFrameWork_MVCDemo.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityFrameWork_MVCDemo.Migrations
 {
     [DbContext(typeof(BatchDbContext))]
-    partial class BatchDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210830052657_Added Validation in Batch")]
+    partial class AddedValidationinBatch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("Admin")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -32,54 +33,11 @@ namespace EntityFrameWork_MVCDemo.Migrations
 
                     b.Property<string>("Course")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Batches");
-                });
-
-            modelBuilder.Entity("EntityFrameWork_MVCDemo.Models.Course", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("CourseId")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int")
-                        .HasColumnName("CourseDuration");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(20)")
-                        .HasColumnName("CourseName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("tblCourse");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Duration = 10,
-                            Name = "C#"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Duration = 40,
-                            Name = "DOtNet"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Duration = 20,
-                            Name = "Java"
-                        });
                 });
 
             modelBuilder.Entity("EntityFrameWork_MVCDemo.Models.Student", b =>
